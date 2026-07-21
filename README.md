@@ -1,11 +1,11 @@
-# TaskFlow Starter
+# CSC400 Task Flow Base Code
 
 A simple task management application built with React and Vite. Tasks are stored in the browser with `localStorage` — there is no backend or database.
 
 ## Installation
 
 ```bash
-cd taskflow-starter
+cd csc400-task-flow-base-code-wiktor
 npm install
 ```
 
@@ -33,7 +33,7 @@ npm install
 ## Folder Structure
 
 ```
-taskflow-starter/
+csc400-task-flow-base-code-wiktor/
 ├── index.html
 ├── package.json
 ├── vite.config.js
