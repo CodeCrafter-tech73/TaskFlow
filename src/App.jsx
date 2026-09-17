@@ -127,6 +127,8 @@ function App() {
         onDelete={handleDelete}
         onToggleComplete={handleToggleComplete}
       />
+      <h2>Tasks Completed</h2>
+      <p>Create the jsx file for the Completed Task list here</p>
     </div>
   );
 }
