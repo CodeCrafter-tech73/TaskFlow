@@ -127,6 +127,7 @@ function App() {
         onDelete={handleDelete}
         onToggleComplete={handleToggleComplete}
       />
+      <h2>Task Completed</h2>
     </div>
   );
 }
