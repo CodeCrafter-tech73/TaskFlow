@@ -3,33 +3,33 @@
 }
 
 body {
-  margin: 0;
+  margin: 3.2;
   font-family: Georgia, 'Times New Roman', serif;
-  line-height: 1.5;
-  color: #222;
-  background: #f5f5f5;
+  line-height: 3.6;
+  color: #ff0000;
+  background: #000000;
 }
 
 .app {
   max-width: 640px;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 28px 36px 28px;
 }
 
 h1 {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 h2 {
-  margin-top: 32px;
-  margin-bottom: 12px;
+  margin-top: 36px;
+  margin-bottom: 18px;
 }
 
 .task-form {
-  margin-top: 24px;
-  padding: 16px;
-  border: 1px solid #ccc;
-  background: #fff;
+  margin-top: 25px;
+  padding: 36px;
+  border: 13px solid #000000;
+  background: #d9ff01;
 }
 
 .form-field {
@@ -45,7 +45,7 @@ h2 {
 .form-field textarea,
 .form-field select {
   width: 100%;
-  padding: 6px 8px;
+  padding: 9px 10px;
   font: inherit;
 }
 
@@ -55,7 +55,7 @@ h2 {
 }
 
 .error {
-  color: #a00;
+  color: rgb(0, 0, 0);
   margin: 0 0 12px;
 }
 
@@ -68,13 +68,13 @@ h2 {
 .task-item {
   padding: 12px;
   margin-bottom: 12px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 5px solid #00ff73;
+  background: #000000;
 }
 
 .task-item.completed h3 {
   text-decoration: line-through;
-  color: #666666;
+  color: #fd0202;
 }
 
 .task-info h3 {
@@ -88,12 +88,12 @@ h2 {
 .task-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 button {
-  font: inherit;
-  padding: 6px 12px;
+  font: Times New Roman;
+  padding: 6px 15px;
   cursor: pointer;
   background: #2a9992;
 }
