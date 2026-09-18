@@ -95,6 +95,7 @@ button {
   font: Times New Roman;
   padding: 6px 15px;
   cursor: pointer;
+  background: #2a9992;
 }
 
 .empty-message {
