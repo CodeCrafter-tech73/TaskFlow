@@ -24,6 +24,7 @@ npm install
 - Edit an existing task
 - Delete a task (with confirmation)
 - Mark a task complete or incomplete
+- Search tasks by title or description and select from matching suggestions
 - Persist tasks in `localStorage`
 - Load saved tasks on startup
 - Validate that a title is required
@@ -54,7 +55,6 @@ csc400-task-flow-base-code-wiktor/
 
 - Filter tasks by status (all / active / completed)
 - Sort by due date or priority
-- Search tasks by title
 - Add categories or tags
 - Due-date reminders
 - Export / import tasks as JSON

@@ -45,14 +45,20 @@ function App() {
   const [tasks, setTasks] = useState(getInitialTasks);
   const [editingTask, setEditingTask] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   const normalizedSearchQuery = searchQuery.trim().toLowerCase();
-  const visibleTasks = normalizedSearchQuery
+  const matchingTasks = normalizedSearchQuery
     ? tasks.filter((task) =>
         task.title.toLowerCase().includes(normalizedSearchQuery) ||
         task.description.toLowerCase().includes(normalizedSearchQuery)
       )
-    : tasks;
+    : [];
+  const visibleTasks = selectedTaskId
+    ? tasks.filter((task) => task.id === selectedTaskId)
+    : normalizedSearchQuery
+      ? matchingTasks
+      : tasks;
 
   function handleSave(taskData) {
     let updatedTasks;
@@ -136,9 +142,32 @@ function App() {
           id="task-search"
           type="search"
           value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
+          onChange={(event) => {
+            setSearchQuery(event.target.value);
+            setSelectedTaskId(null);
+          }}
           placeholder="Search titles and descriptions"
         />
+        {normalizedSearchQuery && !selectedTaskId && matchingTasks.length > 0 && (
+          <ul className="task-search-suggestions" aria-label="Matching tasks">
+            {matchingTasks.map((task) => (
+              <li key={task.id}>
+                <button
+                  type="button"
+                  className="task-search-suggestion"
+                  onClick={() => setSelectedTaskId(task.id)}
+                >
+                  <span className="task-search-suggestion-title">{task.title}</span>
+                  {task.description && (
+                    <span className="task-search-suggestion-description">
+                      {task.description}
+                    </span>
+                  )}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <TaskList
         tasks={visibleTasks}
