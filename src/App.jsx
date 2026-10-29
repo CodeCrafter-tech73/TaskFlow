@@ -46,6 +46,7 @@ function App() {
   const [editingTask, setEditingTask] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const normalizedSearchQuery = searchQuery.trim().toLowerCase();
   const matchingTasks = normalizedSearchQuery
@@ -136,19 +137,27 @@ function App() {
       />
 
       <h2>Tasks</h2>
-      <div className="form-field task-search">
+      <div
+        className="form-field task-search"
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setIsSearchFocused(false);
+          }
+        }}
+      >
         <label htmlFor="task-search">Search tasks</label>
         <input
           id="task-search"
           type="search"
           value={searchQuery}
+          onFocus={() => setIsSearchFocused(true)}
           onChange={(event) => {
             setSearchQuery(event.target.value);
             setSelectedTaskId(null);
           }}
           placeholder="Search titles and descriptions"
         />
-        {normalizedSearchQuery && !selectedTaskId && matchingTasks.length > 0 && (
+        {isSearchFocused && normalizedSearchQuery && !selectedTaskId && matchingTasks.length > 0 && (
           <ul className="task-search-suggestions" aria-label="Matching tasks">
             {matchingTasks.map((task) => (
               <li key={task.id}>
