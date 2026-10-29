@@ -36,6 +36,10 @@ h2 {
   margin-bottom: 12px;
 }
 
+.task-search {
+  margin-bottom: 16px;
+}
+
 .form-field label {
   display: block;
   margin-bottom: 4px;

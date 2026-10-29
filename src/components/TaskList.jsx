@@ -1,8 +1,8 @@
 import TaskItem from './TaskItem.jsx';
 
-function TaskList({ tasks, onEdit, onDelete, onToggleComplete }) {
+function TaskList({ tasks, emptyMessage, onEdit, onDelete, onToggleComplete }) {
   if (tasks.length === 0) {
-    return <p className="empty-message">No tasks yet. Add one above.</p>;
+    return <p className="empty-message">{emptyMessage ?? 'No tasks yet. Add one above.'}</p>;
   }
 
   return (

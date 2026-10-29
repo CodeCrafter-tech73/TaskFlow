@@ -44,6 +44,15 @@ function getInitialTasks() {
 function App() {
   const [tasks, setTasks] = useState(getInitialTasks);
   const [editingTask, setEditingTask] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+  const visibleTasks = normalizedSearchQuery
+    ? tasks.filter((task) =>
+        task.title.toLowerCase().includes(normalizedSearchQuery) ||
+        task.description.toLowerCase().includes(normalizedSearchQuery)
+      )
+    : tasks;
 
   function handleSave(taskData) {
     let updatedTasks;
@@ -121,8 +130,19 @@ function App() {
       />
 
       <h2>Tasks</h2>
+      <div className="form-field task-search">
+        <label htmlFor="task-search">Search tasks</label>
+        <input
+          id="task-search"
+          type="search"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          placeholder="Search titles and descriptions"
+        />
+      </div>
       <TaskList
-        tasks={tasks}
+        tasks={visibleTasks}
+        emptyMessage={normalizedSearchQuery ? 'No matching tasks found.' : undefined}
         onEdit={handleEdit}
         onDelete={handleDelete}
         onToggleComplete={handleToggleComplete}
