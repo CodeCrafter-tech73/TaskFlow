@@ -2,6 +2,8 @@
 
 A simple task management application built with React and Vite. Tasks are stored in the browser with `localStorage` — there is no backend or database.
 
+The separate `login.html` page supports local demo account creation and sign-in. Account records and the sign-in state stay in this browser. This client-side flow is not secure authentication and should not be used to protect real accounts or data.
+
 ## Installation
 
 ```bash
@@ -26,6 +28,7 @@ npm install
 - Mark a task complete or incomplete
 - Persist tasks in `localStorage`
 - Load saved tasks on startup
+- Create a browser-local demo account and sign in
 - Validate that a title is required
 - Empty-state message when no tasks exist
 - Sample tasks on first visit
