@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TaskForm from './components/TaskForm.jsx';
+import TaskCalendar from './components/TaskCalendar.jsx';
 import TaskList from './components/TaskList.jsx';
 import { signOut } from './services/authStorage.js';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
@@ -126,6 +127,8 @@ function App() {
         editingTask={editingTask}
         onCancel={handleCancelEdit}
       />
+
+      <TaskCalendar tasks={tasks} />
 
       <h2>Tasks</h2>
       <TaskList
