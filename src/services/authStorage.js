@@ -86,6 +86,15 @@ export function isSignedIn() {
   }
 }
 
+export function getCurrentUser() {
+  try {
+    const session = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    return session?.username || null;
+  } catch {
+    return null;
+  }
+}
+
 export function signOut() {
   localStorage.removeItem(SESSION_KEY);
 }
