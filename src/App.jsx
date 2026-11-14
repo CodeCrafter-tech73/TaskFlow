@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import TaskForm from './components/TaskForm.jsx';
+import TaskCalendar from './components/TaskCalendar.jsx';
 import TaskList from './components/TaskList.jsx';
+import { signOut } from './services/authStorage.js';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
 
 const SAMPLE_TASKS = [
@@ -198,6 +200,16 @@ function App({ currentUserId = 'prototype-user' }) {
           {message}
         </p>
       )}
+  function handleSignOut() {
+    signOut();
+    window.location.assign('/login.html');
+  }
+
+  return (
+    <div className="app">
+      <button type="button" onClick={handleSignOut}>Sign out</button>
+      <h1>TaskFlow</h1>
+      <p>A simple task manager that stores data in your browser.</p>
 
       <TaskForm
         onSubmit={handleSave}
@@ -280,6 +292,17 @@ function App({ currentUserId = 'prototype-user' }) {
         />
       </section>
     </main>
+      <TaskCalendar tasks={tasks} />
+
+      <h2>Tasks</h2>
+      <TaskList
+        tasks={tasks}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onToggleComplete={handleToggleComplete}
+      />
+      <h2>Task Completed</h2>
+    </div>
   );
 }
 

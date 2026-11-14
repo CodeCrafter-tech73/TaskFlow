@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #17231f;
+  background: #f7f8f4;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.auth-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.88fr) minmax(480px, 1.12fr);
+}
+
+.auth-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 38px clamp(28px, 6vw, 88px) 32px;
+  overflow: hidden;
+  color: #f3f5e9;
+  background-color: #176b55;
+  background-image: linear-gradient(135deg, transparent 62%, rgba(12, 57, 48, 0.18) 62%),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(255, 255, 255, 0.045) 40px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  width: fit-content;
+  color: inherit;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 21px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 34px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(243, 245, 233, 0.55);
+  font-size: 17px;
+}
+
+.aside-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 430px;
+  padding: 52px 0;
+}
+
+.eyebrow,
+.form-kicker,
+.aside-index {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: #c8d8a4;
+}
+
+.aside-copy h1 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.aside-copy > p:last-child {
+  max-width: 300px;
+  margin: 22px 0 0;
+  color: #d7e3d8;
+  font-size: 15px;
+}
+
+.aside-index {
+  color: #c8d8a4;
+  font-size: 10px;
+}
+
+.auth-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  padding: 52px clamp(28px, 7vw, 100px) 20px;
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 430px;
+  margin: auto 0;
+}
+
+.form-kicker {
+  margin: 0 0 12px;
+  color: #497967;
+  font-size: 10px;
+}
+
+.auth-form-wrap h2 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.form-description {
+  margin: 9px 0 30px;
+  color: #65726b;
+  font-size: 14px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 19px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 14px;
+}
+
+.field-wide {
+  grid-column: 1 / -1;
+}
+
+.auth-field {
+  display: grid;
+  gap: 6px;
+}
+
+.auth-field label {
+  color: #35443d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auth-field input {
+  width: 100%;
+  min-height: 45px;
+  padding: 10px 12px;
+  border: 1px solid #cbd4ce;
+  border-radius: 2px;
+  outline: none;
+  color: #17231f;
+  background: #fff;
+}
+
+.auth-field input:focus {
+  border-color: #176b55;
+  box-shadow: 0 0 0 3px rgba(23, 107, 85, 0.12);
+}
+
+.primary-button {
+  min-height: 47px;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+  background: #176b55;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #10513f;
+}
+
+.primary-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.form-message {
+  margin: -4px 0 0;
+  font-size: 13px;
+}
+
+.error-message {
+  color: #a22d2d;
+}
+
+.success-message {
+  color: #176b55;
+}
+
+.mode-switch {
+  margin: 22px 0 0;
+  color: #65726b;
+  font-size: 13px;
+  text-align: center;
+}
+
+.mode-switch button {
+  padding: 0;
+  border: 0;
+  color: #176b55;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mode-switch button:hover {
+  text-decoration: underline;
+}
+
+.auth-footer {
+  width: 100%;
+  max-width: 430px;
+  padding-top: 20px;
+  color: #748078;
+  font-size: 11px;
+}
+
+.auth-footer span {
+  padding: 0 5px;
+  color: #176b55;
+}
+
+@media (max-width: 760px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-aside {
+    min-height: auto;
+    padding: 22px 25px 24px;
+  }
+
+  .aside-copy {
+    padding: 34px 0 22px;
+  }
+
+  .aside-copy h1 {
+    font-size: 42px;
+  }
+
+  .aside-copy > p:last-child {
+    margin-top: 12px;
+  }
+
+  .aside-index {
+    display: none;
+  }
+
+  .auth-main {
+    justify-content: flex-start;
+    padding: 38px 25px 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-wide {
+    grid-column: auto;
+  }
+}
