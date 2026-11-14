@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TaskForm from './components/TaskForm.jsx';
 import TaskCalendar from './components/TaskCalendar.jsx';
 import TaskList from './components/TaskList.jsx';
-import { signOut } from './services/authStorage.js';
+import { getCurrentUser, signOut } from './services/authStorage.js';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
 
 const SAMPLE_TASKS = [
@@ -45,9 +45,7 @@ function getInitialTasks(userId) {
   return stored;
 }
 
-function App({ currentUserId = 'prototype-user' }) {
-  // The temporary ID keeps TaskFlow working until the login system
-  // provides the real logged-in user's ID.
+function App({ currentUserId = getCurrentUser() || 'prototype-user' }) {
   const [tasks, setTasks] = useState(() =>
     getInitialTasks(currentUserId)
   );
@@ -158,6 +156,11 @@ function App({ currentUserId = 'prototype-user' }) {
     );
   }
 
+  function handleSignOut() {
+    signOut();
+    window.location.assign('/login.html');
+  }
+
   const normalizedSearch = searchText.trim().toLowerCase();
 
   // Search and filters help users find specific tasks.
@@ -184,11 +187,18 @@ function App({ currentUserId = 'prototype-user' }) {
   return (
     <main className="app">
       <header className="app-header">
-        <h1>TaskFlow</h1>
-        <p>
-          Organize your tasks clearly and keep track of your
-          progress.
-        </p>
+        <div className="header-row">
+          <div>
+            <h1>TaskFlow</h1>
+            <p>
+              Organize your tasks clearly and keep track of your
+              progress.
+            </p>
+          </div>
+          <button type="button" onClick={handleSignOut}>
+            Sign out
+          </button>
+        </div>
       </header>
 
       {message && (
@@ -200,22 +210,14 @@ function App({ currentUserId = 'prototype-user' }) {
           {message}
         </p>
       )}
-  function handleSignOut() {
-    signOut();
-    window.location.assign('/login.html');
-  }
-
-  return (
-    <div className="app">
-      <button type="button" onClick={handleSignOut}>Sign out</button>
-      <h1>TaskFlow</h1>
-      <p>A simple task manager that stores data in your browser.</p>
 
       <TaskForm
         onSubmit={handleSave}
         editingTask={editingTask}
         onCancel={handleCancelEdit}
       />
+
+      <TaskCalendar tasks={tasks} />
 
       <section
         className="task-section"
@@ -292,17 +294,6 @@ function App({ currentUserId = 'prototype-user' }) {
         />
       </section>
     </main>
-      <TaskCalendar tasks={tasks} />
-
-      <h2>Tasks</h2>
-      <TaskList
-        tasks={tasks}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        onToggleComplete={handleToggleComplete}
-      />
-      <h2>Task Completed</h2>
-    </div>
   );
 }
 
