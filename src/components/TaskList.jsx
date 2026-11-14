@@ -1,12 +1,21 @@
 import TaskItem from './TaskItem.jsx';
 
-function TaskList({ tasks, onEdit, onDelete, onToggleComplete }) {
+function TaskList({
+  tasks,
+  onEdit,
+  onDelete,
+  onToggleComplete,
+}) {
   if (tasks.length === 0) {
-    return <p className="empty-message">No tasks yet. Add one above.</p>;
+    return (
+      <p className="empty-message">
+        No tasks match the current search or filters.
+      </p>
+    );
   }
 
   return (
-    <ul className="task-list">
+    <ul className="task-list" aria-label="Task list">
       {tasks.map((task) => (
         <TaskItem
           key={task.id}
