@@ -9,7 +9,7 @@ function toDateKey(date) {
   return `${year}-${month}-${day}`;
 }
 
-function TaskCalendar({ tasks }) {
+function TaskCalendar({ tasks, onRemoveTask }) {
   const [month, setMonth] = useState(() => {
     const today = new Date();
     return new Date(today.getFullYear(), today.getMonth(), 1);
@@ -31,7 +31,10 @@ function TaskCalendar({ tasks }) {
   });
   const tasksByDate = tasks.reduce((groupedTasks, task) => {
     if (task.dueDate) {
-      groupedTasks[task.dueDate] = [...(groupedTasks[task.dueDate] || []), task];
+      if (!groupedTasks[task.dueDate]) {
+        groupedTasks[task.dueDate] = [];
+      }
+      groupedTasks[task.dueDate].push(task);
     }
     return groupedTasks;
   }, {});
@@ -64,9 +67,9 @@ function TaskCalendar({ tasks }) {
         </div>
       </div>
       <p className="calendar-month" aria-live="polite">{monthLabel}</p>
-      <div className="calendar-grid" role="grid" aria-label={monthLabel}>
+      <div className="calendar-grid" role="group" aria-label={monthLabel}>
         {WEEKDAYS.map((weekday) => (
-          <div className="calendar-weekday" role="columnheader" key={weekday}>
+          <div className="calendar-weekday" key={weekday}>
             {weekday}
           </div>
         ))}
@@ -79,20 +82,27 @@ function TaskCalendar({ tasks }) {
           return (
             <div
               className={`calendar-day${isToday ? ' is-today' : ''}${isCurrentMonth ? '' : ' outside-month'}`}
-              role="gridcell"
-              aria-label={`${day.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}${dayTasks.length ? `, ${dayTasks.length} task${dayTasks.length === 1 ? '' : 's'}` : ''}`}
               key={dateKey}
             >
               <span className="calendar-date">{day.getDate()}</span>
               <div className="calendar-tasks">
                 {dayTasks.slice(0, 3).map((task) => (
-                  <span
-                    className={`calendar-task priority-${task.priority}${task.completed ? ' is-completed' : ''}`}
-                    key={task.id}
-                    title={task.title}
-                  >
-                    {task.title}
-                  </span>
+                  <div className="calendar-task-row" key={task.id}>
+                    <span
+                      className={`calendar-task priority-${task.priority}${task.completed ? ' is-completed' : ''}`}
+                      title={task.title}
+                    >
+                      {task.title}
+                    </span>
+                    <button
+                      type="button"
+                      className="calendar-task-remove"
+                      aria-label={`Remove ${task.title} from calendar`}
+                      onClick={() => onRemoveTask(task.id)}
+                    >
+                      &times;
+                    </button>
+                  </div>
                 ))}
                 {dayTasks.length > 3 && (
                   <span className="calendar-more">+{dayTasks.length - 3} more</span>

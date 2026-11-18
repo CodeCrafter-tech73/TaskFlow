@@ -134,6 +134,16 @@ function App({ currentUserId = getCurrentUser() || 'prototype-user' }) {
     }
   }
 
+  function handleRemoveFromCalendar(id) {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, dueDate: '' } : task
+    );
+
+    setTasks(updatedTasks);
+    saveTasks(currentUserId, updatedTasks);
+    showMessage('Task removed from the calendar.');
+  }
+
   function handleToggleComplete(id) {
     const selectedTask = tasks.find((task) => task.id === id);
 
@@ -217,8 +227,6 @@ function App({ currentUserId = getCurrentUser() || 'prototype-user' }) {
         onCancel={handleCancelEdit}
       />
 
-      <TaskCalendar tasks={tasks} />
-
       <section
         className="task-section"
         aria-labelledby="task-list-heading"
@@ -230,6 +238,11 @@ function App({ currentUserId = getCurrentUser() || 'prototype-user' }) {
             {visibleTasks.length} shown
           </span>
         </div>
+
+        <TaskCalendar
+          tasks={tasks}
+          onRemoveTask={handleRemoveFromCalendar}
+        />
 
         <div className="task-controls">
           <div className="control-field search-field">
